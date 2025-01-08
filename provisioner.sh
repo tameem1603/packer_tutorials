@@ -33,6 +33,15 @@ git --version
 sudo apt update
 sudo apt install fontconfig openjdk-17-jre
 java -version
-openjdk version "17.0.13" 2024-10-15
-OpenJDK Runtime Environment (build 17.0.13+11-Debian-2)
-OpenJDK 64-Bit Server VM (build 17.0.13+11-Debian-2, mixed mode, sharing)
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo dnf upgrade
+
+
+# Add required dependencies for the jenkins package
+sudo dnf install fontconfig java-17-openjdk
+sudo dnf install jenkins
+sudo systemctl daemon-reload
