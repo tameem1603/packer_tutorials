@@ -47,7 +47,28 @@ source "amazon-ebs" "ubuntu" {
 build {
   sources = ["source.amazon-ebs.ubuntu"]
 
+  provisioner "file" {
+  source = "provisioner.sh"
+  destination = "/tmp/provisioner.sh"
+}
+
   provisioner "shell" {
-    script = "provisioner.sh"
+    inline = ["chmod a+x /tmp/provisioner.sh"]
+  }
+  
+  provisioner "shell" {
+    inline = [ "ls -la /tmp"]
+  }
+  
+    provisioner "shell" {
+    inline = [ "pwd"]
+  }
+  
+  provisioner "shell" {
+    inline = [ "cat /tmp/provisioner.sh"]
+  }
+
+  provisioner "shell" {
+    inline = ["/bin/bash -x /tmp/provisioner.sh"]
   }
 }
